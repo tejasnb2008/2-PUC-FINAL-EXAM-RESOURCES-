@@ -48,18 +48,23 @@ html,body{
   align-items:center;
   justify-content:space-between;
 }
+/* Bigger, Bolder Heading + Subheading */
 .title-block h1{
   margin:0;
-  font-size:1.1rem;
-  letter-spacing:0.6px;
+  font-size:1.9rem;          /* BIGGER */
+  font-weight:900;           /* BOLDER */
+  letter-spacing:1px;
   color:var(--accent-2);
-}
-.subtitle{
-  margin:4px 0 0;
-  color:var(--muted);
-  font-size:0.85rem;
+  text-shadow:0 0 10px rgba(255,0,0,0.35);
 }
 
+.subtitle{
+  margin:6px 0 0;
+  color:var(--muted);
+  font-size:1.05rem;          /* BIGGER */
+  font-weight:600;            /* SEMI-BOLD */
+  opacity:0.9;
+}
 /* Top action / buttons */
 .top-actions { display:flex; gap:8px; align-items:center; }
 .btn{
