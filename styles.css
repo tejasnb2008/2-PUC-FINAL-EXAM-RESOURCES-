@@ -65,6 +65,16 @@ html,body{
   font-weight:600;            /* SEMI-BOLD */
   opacity:0.9;
 }
+
+@media (min-width:700px){
+  .title-block h1{
+    font-size:2.4rem;         /* Even larger on bigger screens */
+  }
+  .subtitle{
+    font-size:1.2rem;
+  }
+}
+
 /* Top action / buttons */
 .top-actions { display:flex; gap:8px; align-items:center; }
 .btn{
