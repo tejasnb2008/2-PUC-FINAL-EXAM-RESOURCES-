@@ -75,6 +75,20 @@ html,body{
   }
 }
 
+/* visitor counter */
+#visitor-wrap { font-size: 0.95rem; color: var(--muted); }
+#visitor-count {
+  font-weight: 800;
+  color: var(--accent-2);
+  background: var(--glass);
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.04);
+  min-width:50px;
+  text-align:center;
+  display:inline-block;
+}
+
 /* Top action / buttons */
 .top-actions { display:flex; gap:8px; align-items:center; }
 .btn{
