@@ -185,6 +185,9 @@ async function init() {
 
   // initial render
   render(path, data);
+ 
+  // load visitor count (non-blocking)
+  loadVisitorCount();
 
   // search handler (debounced simple)
   let to = null;
@@ -208,3 +211,33 @@ async function init() {
 }
 
 document.addEventListener('DOMContentLoaded', init);
+
+// ------------------ visitor counter via CountAPI (client-side) ------------------
+// Uses https://countapi.xyz — no backend needed.
+// Namespace: choose a short unique namespace like 'tejasnb2008'.
+// Key: we derive from the path so each folder/page can have its own counter.
+// If you prefer one global counter, set key = 'global'
+
+async function loadVisitorCount() {
+  try {
+    const namespace = 'tejasnb2008'; // change if you want your own namespace
+    // derive key from pathname so "/?path=math" is distinct: remove leading slash and encode
+    const rawKey = (location.pathname + (location.search || '')).replace(/^\//,'') || 'home';
+    const key = encodeURIComponent(rawKey.replace(/\//g, '_') || 'home');
+
+    // Use "hit" endpoint — increments and returns value. Use "get" if you don't want to increment.
+    const url = `https://api.countapi.xyz/hit/${namespace}/${key}`;
+
+    const res = await fetch(url, { cache: 'no-store' });
+    if (!res.ok) throw new Error('countapi error');
+
+    const json = await res.json();
+    // json.value contains the count
+    const el = document.getElementById('visitor-count');
+    if (el) el.textContent = (typeof json.value === 'number') ? json.value.toLocaleString() : '—';
+  } catch (err) {
+    console.warn('visitor count failed', err);
+    const el = document.getElementById('visitor-count');
+    if (el) el.textContent = '—';
+  }
+}
